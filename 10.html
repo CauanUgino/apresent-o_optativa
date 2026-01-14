@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Web App - Níveis de Acesso</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&amp;family=Oswald:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: 'Montserrat', sans-serif;
+        background-color: #000000;
+    }
+
+    .slide-container {
+        width: 1280px;
+        height: 720px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        background-color: #121212;
+        color: #ffffff;
+        overflow: hidden;
+    }
+
+    /* Background Elements */
+    .bg-grid {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 50px 50px;
+        z-index: 0;
+    }
+
+    .bg-glow {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.1;
+        z-index: 0;
+    }
+
+    .glow-1 { top: -200px; left: -100px; background-color: #2ecc71; }
+    .glow-2 { bottom: -200px; right: -100px; background-color: #e74c3c; }
+
+    /* Header Section */
+    .header-section {
+        padding: 3rem 4rem 1rem 4rem;
+        z-index: 10;
+        text-align: center;
+    }
+
+    .main-title {
+        font-family: 'Oswald', sans-serif;
+        font-size: 3.5rem;
+        color: #ffffff;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        letter-spacing: 2px;
+    }
+
+    .main-title span {
+        color: #3498db;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        color: #aaa;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Diagram Container */
+    .diagram-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 4rem 4rem 4rem;
+        z-index: 10;
+        gap: 2rem;
+    }
+
+    /* Access Card */
+    .access-card {
+        flex: 1;
+        height: 420px;
+        background-color: #1a1a1a;
+        border-radius: 15px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease;
+        border: 1px solid #333;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .access-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .card-header {
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background-color: #222;
+        border-bottom: 1px solid #333;
+    }
+
+    .role-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: #121212;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        border: 4px solid;
+        position: absolute;
+        bottom: -35px;
+        z-index: 5;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
+    .card-body {
+        padding: 45px 20px 20px 20px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .role-title {
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+    }
+
+    .role-subtitle {
+        font-size: 0.8rem;
+        color: #777;
+        margin-bottom: 1.5rem;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .permission-list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .permission-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: rgba(255, 255, 255, 0.03);
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        color: #ccc;
+        transition: background-color 0.2s;
+    }
+    
+    .permission-item:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        color: #fff;
+    }
+
+    .permission-item i {
+        width: 20px;
+        text-align: center;
+    }
+
+    /* Style Variations */
+    /* Public */
+    .card-public { border-top: 6px solid #2ecc71; }
+    .card-public .role-icon { border-color: #2ecc71; color: #2ecc71; }
+    .card-public .role-title { color: #2ecc71; }
+    .card-public:hover { box-shadow: 0 15px 40px rgba(46, 204, 113, 0.2); }
+    .card-public .permission-item i { color: #2ecc71; }
+
+    /* Client */
+    .card-client { border-top: 6px solid #f39c12; }
+    .card-client .role-icon { border-color: #f39c12; color: #f39c12; }
+    .card-client .role-title { color: #f39c12; }
+    .card-client:hover { box-shadow: 0 15px 40px rgba(243, 156, 18, 0.2); }
+    .card-client .permission-item i { color: #f39c12; }
+
+    /* Admin */
+    .card-admin { border-top: 6px solid #e74c3c; }
+    .card-admin .role-icon { border-color: #e74c3c; color: #e74c3c; }
+    .card-admin .role-title { color: #e74c3c; }
+    .card-admin:hover { box-shadow: 0 15px 40px rgba(231, 76, 60, 0.2); }
+    .card-admin .permission-item i { color: #e74c3c; }
+
+    /* Badge */
+    .security-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 1.2rem;
+        opacity: 0.3;
+    }
+
+    .bg-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 10rem;
+        opacity: 0.03;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+</style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Backgrounds -->
+<div class="bg-grid"></div>
+<div class="bg-glow glow-1"></div>
+<div class="bg-glow glow-2"></div>
+<!-- Header -->
+<div class="header-section">
+<h1 class="main-title">Três Níveis de <span>Acesso</span></h1>
+<p class="subtitle">Estrutura de segurança hierárquica garantindo proteção de dados e integridade do sistema.</p>
+</div>
+<!-- Diagram Cards -->
+<div class="diagram-container">
+<!-- Level 1: Public -->
+<div class="access-card card-public">
+<div class="bg-icon"><i class="fas fa-globe"></i></div>
+<div class="security-badge"><i class="fas fa-unlock"></i></div>
+<div class="card-header">
+<!-- Header Image or Pattern could go here -->
+<div class="role-icon">
+<i class="fas fa-users"></i>
+</div>
+</div>
+<div class="card-body">
+<h3 class="role-title">Público</h3>
+<div class="role-subtitle">Acesso Aberto</div>
+<div class="permission-list">
+<div class="permission-item">
+<i class="fas fa-home"></i>
+<span>Home Page</span>
+</div>
+<div class="permission-item">
+<i class="fas fa-book-open"></i>
+<span>Menu / Cardápio</span>
+</div>
+<div class="permission-item">
+<i class="fas fa-calendar-alt"></i>
+<span>Reserva de Mesas</span>
+</div>
+<div class="permission-item">
+<i class="fas fa-comment-alt"></i>
+<span>Feedback &amp; Sobre</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Level 2: Client -->
+<div class="access-card card-client">
+<div class="bg-icon"><i class="fas fa-user"></i></div>
+<div class="security-badge"><i class="fas fa-key"></i></div>
+<div class="card-header">
+<div class="role-icon">
+<i class="fas fa-user-check"></i>
+</div>
+</div>
+<div class="card-body">
+<h3 class="role-title">Cliente</h3>
+<div class="role-subtitle">Autenticado (Login)</div>
+<div class="permission-list">
+<div class="permission-item">
+<i class="fas fa-shopping-cart"></i>
+<span>Gestão do Carrinho</span>
+</div>
+<div class="permission-item">
+<i class="fas fa-credit-card"></i>
+<span>Checkout &amp; Pagamento</span>
+</div>
+<div class="permission-item">
+<i class="fas fa-receipt"></i>
+<span>Meus Pedidos</span>
+</div>
+<div class="permission-item">
+<i class="fas fa-id-card"></i>
+<span>Perfil do Usuário</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Level 3: Admin -->
+<div class="access-card card-admin">
+<div class="bg-icon"><i class="fas fa-shield-alt"></i></div>
+<div class="security-badge"><i class="fas fa-lock"></i></div>
+<div class="card-header">
+<div class="role-icon">
+<i class="fas fa-user-shield"></i>
+</div>
+</div>
+<div class="card-body">
+<h3 class="role-title">Admin</h3>
+<div class="role-subtitle">Staff (is_staff=True)</div>
+<div class="permission-list">
+<div class="permission-item">
+<i class="fas fa-tachometer-alt"></i>
+<span>Dashboard Geral</span>
+</div>
+<div class="permission-item">
+<i class="fas fa-pen-square"></i>
+<span>CMS &amp; Conteúdo</span>
+</div>
+<div class="permission-item">
+<i class="fas fa-truck"></i>
+<span>Logística &amp; Entregas</span>
+</div>
+<div class="permission-item">
+<i class="fas fa-database"></i>
+<span>Gestão de Itens</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Web App - Encerramento</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&amp;family=Oswald:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000000;
+        }
+
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: #121212;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Background Decor (No Gradients) */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .circle-1 {
+            width: 800px;
+            height: 800px;
+            top: -400px;
+            left: -200px;
+            background-color: #ff4757; /* Red */
+            opacity: 0.05;
+        }
+
+        .circle-2 {
+            width: 600px;
+            height: 600px;
+            bottom: -300px;
+            right: -100px;
+            background-color: #ffa502; /* Orange */
+            opacity: 0.05;
+        }
+
+        .bg-icon-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25rem;
+            color: #ffffff;
+            opacity: 0.02;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Main Content */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .brand-pill {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffa502;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 165, 2, 0.3);
+            display: inline-block;
+        }
+
+        .main-headline {
+            font-family: 'Oswald', sans-serif;
+            font-size: 5rem;
+            line-height: 1.1;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .main-headline span {
+            color: #ff4757;
+            display: inline-block;
+            position: relative;
+        }
+        
+        /* Underline decoration using border instead of gradient */
+        .main-headline span::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-color: rgba(255, 71, 87, 0.3);
+            z-index: -1;
+        }
+
+        .sub-headline {
+            font-size: 1.5rem;
+            color: #ccc;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            line-height: 1.5;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background-color: #ff4757;
+            color: #ffffff;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 1.2rem 4rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255, 71, 87, 0.4);
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 4rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            background-color: #ff6b81;
+            box-shadow: 0 15px 35px rgba(255, 71, 87, 0.5);
+        }
+
+        /* Contact Grid */
+        .contact-container {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            width: 100%;
+            border-top: 1px solid #333;
+            padding-top: 3rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #aaa;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            color: #fff;
+        }
+
+        .contact-icon-box {
+            width: 50px;
+            height: 50px;
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: #ffa502;
+            border: 1px solid #333;
+        }
+
+        .contact-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #666;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        
+        .contact-value {
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer-note {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            z-index: 5;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .float-1 { top: 150px; left: 100px; font-size: 3rem; color: #2ecc71; opacity: 0.8; animation-delay: 0s; }
+        .float-2 { top: 200px; right: 150px; font-size: 2.5rem; color: #f1c40f; opacity: 0.8; animation-delay: 1s; }
+        .float-3 { bottom: 200px; left: 150px; font-size: 2rem; color: #3498db; opacity: 0.8; animation-delay: 2s; }
+        .float-4 { bottom: 250px; right: 100px; font-size: 3.5rem; color: #e74c3c; opacity: 0.8; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Decor -->
+<div class="bg-circle circle-1"></div>
+<div class="bg-circle circle-2"></div>
+<div class="bg-icon-watermark">
+<i class="fas fa-hamburger"></i>
+</div>
+<!-- Floating Icons -->
+<div class="floating-element float-1"><i class="fas fa-check-circle"></i></div>
+<div class="floating-element float-2"><i class="fas fa-star"></i></div>
+<div class="floating-element float-3"><i class="fas fa-shipping-fast"></i></div>
+<div class="floating-element float-4"><i class="fas fa-heart"></i></div>
+<!-- Main Content -->
+<div class="content-wrapper">
+<div class="brand-pill">Restaurant Web App v1.5.0</div>
+<h1 class="main-headline">
+                TRANSFORME SEU<br/>
+<span>RESTAURANTE</span> HOJE!
+            </h1>
+<p class="sub-headline">
+                Tenha controle total sobre pedidos, entregas e cardápio em uma única plataforma integrada e escalável.
+            </p>
+<button class="cta-button">
+<i class="fas fa-rocket"></i>
+<span>Ver Demo Agora</span>
+</button>
+<!-- Contact Grid -->
+<div class="contact-container">
+<div class="contact-item">
+<div class="contact-icon-box">
+<i class="fab fa-github"></i>
+</div>
+<div class="contact-text">
+<span class="contact-label">Código Fonte</span>
+<span class="contact-value">github.com/eltonmoraes6</span>
+</div>
+</div>
+<div class="contact-item">
+<div class="contact-icon-box">
+<i class="fas fa-envelope"></i>
+</div>
+<div class="contact-text">
+<span class="contact-label">Email</span>
+<span class="contact-value">contato@restaurantapp.com</span>
+</div>
+</div>
+<div class="contact-item">
+<div class="contact-icon-box">
+<i class="fas fa-globe"></i>
+</div>
+<div class="contact-text">
+<span class="contact-label">Website</span>
+<span class="contact-value">www.restaurantapp.com</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="footer-note">
+<p>Obrigado pela atenção! 🍽️</p>
+</div>
+</div>
+</body>
+</html>

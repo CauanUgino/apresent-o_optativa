@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Restaurant Web App - Funcionalidades Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&amp;family=Oswald:wght@500;700&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #121212;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Decorative Background */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            opacity: 0.05;
+        }
+
+        .circle-1 {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -100px;
+            background-color: #ffa502;
+            /* Orange */
+        }
+
+        .circle-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -100px;
+            left: -100px;
+            background-color: #ff4d4d;
+            /* Red */
+        }
+
+        /* Header Section */
+        .header-section {
+            padding: 3rem 4rem 1rem 4rem;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .main-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-left: 10px solid #ffa502;
+            padding-left: 25px;
+            line-height: 1;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            font-weight: 500;
+            max-width: 500px;
+            text-align: right;
+        }
+
+        /* Grid Layout */
+        .grid-wrapper {
+            flex: 1;
+            padding: 2rem 4rem 4rem 4rem;
+            z-index: 10;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            align-content: center;
+        }
+
+        .feature-card {
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            padding: 1.5rem;
+            width: calc(33.33% - 1.5rem);
+            /* 3 cards per row approx */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-top: 4px solid transparent;
+            min-height: 220px;
+        }
+
+        /* Adjust width for bottom row to center nicely */
+        .feature-card:nth-child(4),
+        .feature-card:nth-child(5) {
+            width: calc(33.33% - 1.5rem);
+        }
+
+        .icon-container {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: #2a2a2a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            margin-top: -3.5rem;
+            /* Pop out effect */
+            border: 4px solid #121212;
+        }
+
+        .card-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: #b0b0b0;
+            line-height: 1.5;
+        }
+
+        /* Card Specific Colors */
+        .card-menu {
+            border-top-color: #ffa502;
+        }
+
+        .card-menu .icon-container {
+            color: #ffa502;
+            box-shadow: 0 0 15px rgba(255, 165, 2, 0.2);
+        }
+
+        .card-cart {
+            border-top-color: #ff4d4d;
+        }
+
+        .card-cart .icon-container {
+            color: #ff4d4d;
+            box-shadow: 0 0 15px rgba(255, 77, 77, 0.2);
+        }
+
+        .card-track {
+            border-top-color: #2ed573;
+        }
+
+        .card-track .icon-container {
+            color: #2ed573;
+            box-shadow: 0 0 15px rgba(46, 213, 115, 0.2);
+        }
+
+        .card-review {
+            border-top-color: #eccc68;
+        }
+
+        .card-review .icon-container {
+            color: #eccc68;
+            box-shadow: 0 0 15px rgba(236, 204, 104, 0.2);
+        }
+
+        .card-table {
+            border-top-color: #1e90ff;
+        }
+
+        .card-table .icon-container {
+            color: #1e90ff;
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.2);
+        }
+
+        /* Number Badge */
+        .number-badge {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Background Elements -->
+        <div class="bg-circle circle-1"></div>
+        <div class="bg-circle circle-2"></div>
+        <!-- Header -->
+        <div class="header-section">
+            <h1 class="main-title">Para o Cliente</h1>
+            <div class="subtitle">
+                <p>Funcionalidades essenciais projetadas para oferecer a melhor experiência de usuário.</p>
+            </div>
+        </div>
+        <!-- Grid Content -->
+        <div class="grid-wrapper">
+            <!-- Card 1: Menu -->
+            <div class="feature-card card-menu">
+                <div class="icon-container">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <span class="number-badge">01</span>
+                <div class="card-title">Cardápio Interativo</div>
+                <div class="card-desc">
+                    <p>Visualização atraente dos pratos com fotos de alta qualidade, descrições detalhadas e preços
+                        claros.</p>
+                </div>
+            </div>
+            <!-- Card 2: Cart -->
+            <div class="feature-card card-cart">
+                <div class="icon-container">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <span class="number-badge">02</span>
+                <div class="card-title">Carrinho Inteligente</div>
+                <div class="card-desc">
+                    <p>Adicione ou remova itens facilmente com cálculo automático de totais e gestão de quantidades.</p>
+                </div>
+            </div>
+            <!-- Card 3: Tracking -->
+            <div class="feature-card card-track">
+                <div class="icon-container">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <span class="number-badge">03</span>
+                <div class="card-title">Rastreamento</div>
+                <div class="card-desc">
+                    <p>Acompanhamento em tempo real do status do pedido, desde o preparo até a entrega.</p>
+                </div>
+            </div>
+            <!-- Card 4: Reviews -->
+            <div class="feature-card card-review">
+                <div class="icon-container">
+                    <i class="fas fa-star"></i>
+                </div>
+                <span class="number-badge">04</span>
+                <div class="card-title">Avaliações</div>
+                <div class="card-desc">
+                    <p>Sistema de feedback integrado permitindo que clientes avaliem pratos e serviços.</p>
+                </div>
+            </div>
+            <!-- Card 5: Booking -->
+            <div class="feature-card card-table">
+                <div class="icon-container">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <span class="number-badge">05</span>
+                <div class="card-title">Reserva de Mesas</div>
+                <div class="card-desc">
+                    <p>Formulário simples e direto para garantir lugares no restaurante com antecedência.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

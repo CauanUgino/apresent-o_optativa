@@ -1,37 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Apresentação</title>
-  <link rel="stylesheet" href="css/slides.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/slides.css" />
 </head>
+
 <body>
+  <div id="presentation-wrapper">
+    <iframe id="slide-frame" src="slide/1.html" frameborder="0" allowfullscreen></iframe>
+  </div>
 
-  <div id="presentation">
-
-    <!-- Slides -->
-    <div class="slide active" data-src="1.html"></div>
-    <div class="slide" data-src="2.html"></div>
-    <div class="slide" data-src="3.html"></div>
-    <div class="slide" data-src="4.html"></div>
-    <div class="slide" data-src="5.html"></div>
-    <div class="slide" data-src="6.html"></div>
-    <div class="slide" data-src="7.html"></div>
-    <div class="slide" data-src="8.html"></div>
-    <div class="slide" data-src="9.html"></div>
-    <div class="slide" data-src="10.html"></div>
-    <div class="slide" data-src="11.html"></div>
-    <div class="slide" data-src="12.html"></div>
-
-    <!-- Controles -->
-    <div class="controls">
-      <button onclick="prevSlide()">⬅ Anterior</button>
-      <span id="counter">1 / 12</span>
-      <button onclick="nextSlide()">Próximo ➡</button>
-    </div>
-
+  <!-- Controles -->
+  <div class="controls">
+    <button onclick="prevSlide()">⬅</button>
+    <span id="counter">1 / 12</span>
+    <button onclick="nextSlide()">➡</button>
+    <button onclick="toggleFullscreen()">⛶ Tela cheia</button>
   </div>
 
   <script src="js/slides.js"></script>
 </body>
+
 </html>

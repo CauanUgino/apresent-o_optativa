@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Restaurant Web App - Logística</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&amp;family=Oswald:wght@500;700&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            background-color: #121212;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Left Section */
+        .left-section {
+            width: 45%;
+            padding: 4rem;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #181818;
+            border-right: 1px solid #333;
+            position: relative;
+        }
+
+        .left-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background-color: #ff4d4d;
+        }
+
+        .main-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #ffa502;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background-color: #2a2a2a;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            border: 2px solid #333;
+        }
+
+        .text-content h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            margin: 0;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .text-content p {
+            font-size: 0.9rem;
+            margin: 0;
+            color: #888;
+        }
+
+        /* Right Section (Flow) */
+        .right-section {
+            width: 55%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #121212;
+        }
+
+        /* Road/Path Visualization */
+        .flow-container {
+            position: relative;
+            width: 80%;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flow-line {
+            position: absolute;
+            top: 50px;
+            bottom: 50px;
+            left: 50%;
+            width: 6px;
+            background-color: #333;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        /* Animated progress line */
+        .flow-progress {
+            position: absolute;
+            top: 50px;
+            height: 60%;
+            /* Simulate progress */
+            left: 50%;
+            width: 6px;
+            background-color: #ffa502;
+            transform: translateX(-50%);
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(255, 165, 2, 0.5);
+        }
+
+        .flow-step {
+            position: relative;
+            z-index: 5;
+            background-color: #1e1e1e;
+            border: 2px solid #333;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            width: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .step-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .step-text {
+            flex: 1;
+            margin-left: 1rem;
+        }
+
+        .step-text h3 {
+            font-family: 'Oswald', sans-serif;
+            margin: 0;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .step-text p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Step Specific Styles */
+        .step-1 {
+            border-color: #ff4d4d;
+        }
+
+        .step-1 .step-icon {
+            background-color: #ff4d4d;
+        }
+
+        .step-2 {
+            border-color: #ffa502;
+        }
+
+        .step-2 .step-icon {
+            background-color: #ffa502;
+        }
+
+        .step-3 {
+            border-color: #ffa502;
+        }
+
+        .step-3 .step-icon {
+            background-color: #ffa502;
+            animation: pulse 2s infinite;
+        }
+
+        .step-4 {
+            border-color: #333;
+            opacity: 0.6;
+        }
+
+        .step-4 .step-icon {
+            background-color: #333;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 165, 2, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 165, 2, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 165, 2, 0);
+            }
+        }
+
+        /* Connecting arrows */
+        .arrow-down {
+            color: #444;
+            font-size: 1.5rem;
+            z-index: 2;
+            background: #121212;
+            padding: 5px;
+        }
+
+        .map-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIiBmaWxsPSJub25lIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMCAyMGg0ME0yMCAwdjQwIi8+PC9zdmc+');
+            opacity: 0.2;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Left Section: Features -->
+        <div class="left-section">
+            <h1 class="main-title">Grande Diferencial</h1>
+            <h2 class="subtitle">Logística Integrada</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="icon-box text-blue-500" style="border-color: #3498db;">
+                        <p><i class="fas fa-id-card-alt"></i></p>
+                    </div>
+                    <div class="text-content">
+                        <h4>Cadastro de Entregadores</h4>
+                        <p>Banco de dados completo da frota.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-box text-red-500" style="border-color: #ff4d4d;">
+                        <p><i class="fas fa-map-marked-alt"></i></p>
+                    </div>
+                    <div class="text-content">
+                        <h4>Rastreamento Real-Time</h4>
+                        <p>Saiba exatamente onde está o pedido.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-box text-yellow-500" style="border-color: #ffa502;">
+                        <p><i class="fas fa-sync-alt"></i></p>
+                    </div>
+                    <div class="text-content">
+                        <h4>Atualização de Status</h4>
+                        <p>Controle de pendente até entregue.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-box text-green-500" style="border-color: #2ed573;">
+                        <p><i class="fas fa-shield-alt"></i></p>
+                    </div>
+                    <div class="text-content">
+                        <h4>Controle Total</h4>
+                        <p>Histórico e gestão centralizada.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Right Section: Visual Flow -->
+        <div class="right-section">
+            <div class="map-bg"></div>
+            <div class="flow-container">
+                <div class="flow-line"></div>
+                <div class="flow-progress"></div>
+                <!-- Step 1 -->
+                <div class="flow-step step-1">
+                    <div class="step-icon">
+                        <p><i class="fas fa-receipt"></i></p>
+                    </div>
+                    <div class="step-text">
+                        <h3>1. Pedido Recebido</h3>
+                        <p>Cozinha prepara o prato</p>
+                    </div>
+                    <div class="text-green-500">
+                        <p><i class="fas fa-check"></i></p>
+                    </div>
+                </div>
+                <p><i class="fas fa-chevron-down arrow-down"></i></p>
+                <!-- Step 2 -->
+                <div class="flow-step step-2">
+                    <div class="step-icon">
+                        <p><i class="fas fa-user-check"></i></p>
+                    </div>
+                    <div class="step-text">
+                        <h3>2. Atribuição</h3>
+                        <p>Gerente define entregador</p>
+                    </div>
+                    <div class="text-green-500">
+                        <p><i class="fas fa-check"></i></p>
+                    </div>
+                </div>
+                <p><i class="fas fa-chevron-down arrow-down"></i></p>
+                <!-- Step 3 -->
+                <div class="flow-step step-3">
+                    <div class="step-icon">
+                        <p><i class="fas fa-motorcycle"></i></p>
+                    </div>
+                    <div class="step-text">
+                        <h3>3. Em Rota</h3>
+                        <p>Entregador a caminho do cliente</p>
+                    </div>
+                    <div class="text-yellow-500">
+                        <p><i class="fas fa-spinner fa-spin"></i></p>
+                    </div>
+                </div>
+                <p><i class="fas fa-chevron-down arrow-down"></i></p>
+                <!-- Step 4 -->
+                <div class="flow-step step-4">
+                    <div class="step-icon">
+                        <p><i class="fas fa-home"></i></p>
+                    </div>
+                    <div class="step-text">
+                        <h3>4. Entregue</h3>
+                        <p>Pedido finalizado com sucesso</p>
+                    </div>
+                    <div class="text-gray-600">
+                        <p><i class="far fa-circle"></i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

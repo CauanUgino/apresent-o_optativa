@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 
 <html lang="pt-BR">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Restaurant Web App - Encerramento</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&amp;family=Oswald:wght@500;700&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Restaurant Web App - Encerramento</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&amp;family=Oswald:wght@500;700&amp;display=swap"
+        rel="stylesheet" />
+    <style>
         body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #000000;
+            background: #000;
         }
 
         .slide-container {
-            width: 1280px;
-            height: 720px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            width: 1920px;
+            height: 1080px;
             position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
             background-color: #121212;
             color: #ffffff;
             overflow: hidden;
@@ -42,7 +43,8 @@
             height: 800px;
             top: -400px;
             left: -200px;
-            background-color: #ff4757; /* Red */
+            background-color: #ff4757;
+            /* Red */
             opacity: 0.05;
         }
 
@@ -51,7 +53,8 @@
             height: 600px;
             bottom: -300px;
             right: -100px;
-            background-color: #ffa502; /* Orange */
+            background-color: #ffa502;
+            /* Orange */
             opacity: 0.05;
         }
 
@@ -76,7 +79,8 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
-            max-width: 900px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .brand-pill {
@@ -101,7 +105,7 @@
             font-weight: 700;
             margin-bottom: 1rem;
             color: #fff;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .main-headline span {
@@ -109,7 +113,7 @@
             display: inline-block;
             position: relative;
         }
-        
+
         /* Underline decoration using border instead of gradient */
         .main-headline span::after {
             content: '';
@@ -174,7 +178,7 @@
             font-size: 1rem;
             transition: color 0.3s ease;
         }
-        
+
         .contact-item:hover {
             color: #fff;
         }
@@ -205,7 +209,7 @@
             font-weight: 700;
             margin-bottom: 2px;
         }
-        
+
         .contact-value {
             font-weight: 500;
         }
@@ -214,95 +218,141 @@
         .footer-note {
             position: absolute;
             bottom: 20px;
-            font-size: 0.9rem;
+            font-size: 1.9rem;
             color: #555;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        
+
         /* Floating Elements */
         .floating-element {
             position: absolute;
             z-index: 5;
             animation: float 6s ease-in-out infinite;
         }
-        
-        .float-1 { top: 150px; left: 100px; font-size: 3rem; color: #2ecc71; opacity: 0.8; animation-delay: 0s; }
-        .float-2 { top: 200px; right: 150px; font-size: 2.5rem; color: #f1c40f; opacity: 0.8; animation-delay: 1s; }
-        .float-3 { bottom: 200px; left: 150px; font-size: 2rem; color: #3498db; opacity: 0.8; animation-delay: 2s; }
-        .float-4 { bottom: 250px; right: 100px; font-size: 3.5rem; color: #e74c3c; opacity: 0.8; animation-delay: 1.5s; }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+        .float-1 {
+            top: 150px;
+            left: 100px;
+            font-size: 3rem;
+            color: #2ecc71;
+            opacity: 0.8;
+            animation-delay: 0s;
         }
 
+        .float-2 {
+            top: 200px;
+            right: 150px;
+            font-size: 2.5rem;
+            color: #f1c40f;
+            opacity: 0.8;
+            animation-delay: 1s;
+        }
+
+        .float-3 {
+            bottom: 200px;
+            left: 150px;
+            font-size: 2rem;
+            color: #3498db;
+            opacity: 0.8;
+            animation-delay: 2s;
+        }
+
+        .float-4 {
+            bottom: 250px;
+            right: 100px;
+            font-size: 3.5rem;
+            color: #e74c3c;
+            opacity: 0.8;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
     </style>
 </head>
+
 <body>
-<div class="slide-container">
-<!-- Background Decor -->
-<div class="bg-circle circle-1"></div>
-<div class="bg-circle circle-2"></div>
-<div class="bg-icon-watermark">
-<i class="fas fa-hamburger"></i>
-</div>
-<!-- Floating Icons -->
-<div class="floating-element float-1"><i class="fas fa-check-circle"></i></div>
-<div class="floating-element float-2"><i class="fas fa-star"></i></div>
-<div class="floating-element float-3"><i class="fas fa-shipping-fast"></i></div>
-<div class="floating-element float-4"><i class="fas fa-heart"></i></div>
-<!-- Main Content -->
-<div class="content-wrapper">
-<div class="brand-pill">Restaurant Web App v1.5.0</div>
-<h1 class="main-headline">
-                TRANSFORME SEU<br/>
-<span>RESTAURANTE</span> HOJE!
+    <div class="slide-container">
+        <!-- Background Decor -->
+        <div class="bg-circle circle-1"></div>
+        <div class="bg-circle circle-2"></div>
+        <div class="bg-icon-watermark">
+            <i class="fas fa-hamburger"></i>
+        </div>
+        <!-- Floating Icons -->
+        <div class="floating-element float-1"><i class="fas fa-check-circle"></i></div>
+        <div class="floating-element float-2"><i class="fas fa-star"></i></div>
+        <div class="floating-element float-3"><i class="fas fa-shipping-fast"></i></div>
+        <div class="floating-element float-4"><i class="fas fa-heart"></i></div>
+        <!-- Main Content -->
+        <div class="content-wrapper">
+            <div class="brand-pill">Restaurant Web App v1.5.0</div>
+            <h1 class="main-headline">
+                TRANSFORME SEU<br />
+                <span>RESTAURANTE</span> HOJE!
             </h1>
-<p class="sub-headline">
+            <p class="sub-headline">
                 Tenha controle total sobre pedidos, entregas e cardápio em uma única plataforma integrada e escalável.
             </p>
-<button class="cta-button">
-<i class="fas fa-rocket"></i>
-<span>Ver Demo Agora</span>
-</button>
-<!-- Contact Grid -->
-<div class="contact-container">
-<div class="contact-item">
-<div class="contact-icon-box">
-<i class="fab fa-github"></i>
-</div>
-<div class="contact-text">
-<span class="contact-label">Código Fonte</span>
-<span class="contact-value">github.com/eltonmoraes6</span>
-</div>
-</div>
-<div class="contact-item">
-<div class="contact-icon-box">
-<i class="fas fa-envelope"></i>
-</div>
-<div class="contact-text">
-<span class="contact-label">Email</span>
-<span class="contact-value">contato@restaurantapp.com</span>
-</div>
-</div>
-<div class="contact-item">
-<div class="contact-icon-box">
-<i class="fas fa-globe"></i>
-</div>
-<div class="contact-text">
-<span class="contact-label">Website</span>
-<span class="contact-value">www.restaurantapp.com</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Footer -->
-<div class="footer-note">
-<p>Obrigado pela atenção! 🍽️</p>
-</div>
-</div>
+            <button id="demoBtn" class="cta-button">
+                <i class="fas fa-rocket"></i>
+                <span>Ver Demo Agora</span>
+            </button>
+            <!-- Contact Grid -->
+            <div class="contact-container">
+                <div class="contact-item">
+                    <div class="contact-icon-box">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="contact-text">
+                        <span class="contact-label">Código Fonte</span>
+                        <span class="contact-value">github.com/eltonmoraes6</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon-box">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value">contato@restaurantapp.com</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon-box">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="contact-text">
+                        <span class="contact-label">Website</span>
+                        <span class="contact-value">www.restaurantapp.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="footer-note">
+            <p>Obrigado pela atenção! 🍽️</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('demoBtn').addEventListener('click', () => {
+            window.open('http://127.0.0.1:8000/', '_blank');
+        });
+    </script>
 </body>
+
 </html>

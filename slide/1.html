@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+    <title>Restaurant Web App - Capa</title>
+
+    <!-- Tailwind & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Oswald:wght@500;700&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #121212;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Background decorations */
+        .bg-circle-1 {
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background-color: #ff4d4d;
+            opacity: 0.1;
+        }
+
+        .bg-circle-2 {
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background-color: #ffa502;
+            opacity: 0.1;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .main-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            line-height: 1.1;
+        }
+
+        .highlight-text {
+            color: #ff6b6b;
+        }
+
+        .subtitle {
+            margin-top: 20px;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #ffa502;
+            border-bottom: 4px solid #ffa502;
+            padding-bottom: 12px;
+            display: inline-block;
+        }
+
+        .features-container {
+            margin-top: 80px;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.4rem;
+            background: #1e1e1e;
+            padding: 14px 28px;
+            border-radius: 50px;
+            border-left: 5px solid #ff4757;
+        }
+
+        .feature-item i {
+            color: #ffa502;
+        }
+
+        .description {
+            margin-top: 60px;
+            max-width: 1200px;
+            font-size: 1.5rem;
+            color: #bdbdbd;
+            line-height: 1.6;
+        }
+
+        .footer-info {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            width: 100%;
+            padding: 0 100px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .version-badge {
+            background-color: #2ed573;
+            color: #000;
+            padding: 6px 18px;
+            border-radius: 6px;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <div class="bg-circle-1"></div>
+        <div class="bg-circle-2"></div>
+
+        <div class="content-wrapper">
+            <div class="text-7xl text-yellow-500 mb-6 animate-pulse">
+                <i class="fas fa-utensils"></i>
+            </div>
+
+            <div class="main-title">
+                Restaurant <span class="highlight-text">Web App</span>
+            </div>
+
+            <div class="subtitle">
+                Sistema Completo de Gestão v1.5.0
+            </div>
+
+            <div class="features-container">
+                <div class="feature-item"><i class="fas fa-tablet-alt"></i> Cardápio Digital</div>
+                <div class="feature-item"><i class="fas fa-shopping-cart"></i> Pedidos Online</div>
+                <div class="feature-item"><i class="fas fa-truck"></i> Logística Integrada</div>
+                <div class="feature-item"><i class="fas fa-cogs"></i> Painel Admin & CMS</div>
+            </div>
+
+            <div class="description">
+                Uma solução moderna focada em rapidez, controle total e na melhor experiência para o seu cliente.
+            </div>
+        </div>
+
+        <div class="footer-info">
+            <span>Framework: Django 5.2</span>
+            <span class="version-badge">BETA DISPONÍVEL</span>
+            <span>Autores: ADRINY SAFIRA, CAUAN UGINO, CLEITON MATHEUS, CRISTIANO BRITO, ELTON MORAES</span>
+        </div>
+    </div>
+</body>
+
+</html>

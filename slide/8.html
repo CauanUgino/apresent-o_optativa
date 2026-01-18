@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Restaurant Web App - Stack Tecnológica</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&amp;family=Oswald:wght@500;700&amp;family=Fira+Code:wght@400;600&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #121212;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Tech Background */
+        .tech-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.05;
+            background-image:
+                linear-gradient(#333 1px, transparent 1px),
+                linear-gradient(90deg, #333 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Code decoration */
+        .code-decor {
+            position: absolute;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem;
+            /* mais legível */
+            line-height: 1.6;
+            color: #2ed573;
+            opacity: 0.28;
+            /* visível sem competir */
+            z-index: 1;
+            white-space: pre;
+            text-shadow:
+                0 0 8px rgba(46, 213, 115, 0.6),
+                0 0 20px rgba(46, 213, 115, 0.2);
+            pointer-events: none;
+        }
+
+        .code-1 {
+            top: 100px;
+            right: 50px;
+            text-align: right;
+        }
+
+        .code-2 {
+            bottom: 50px;
+            left: 50px;
+        }
+
+        /* Header */
+        .header-section {
+            padding: 3rem 4rem 1rem 4rem;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .section-tag {
+            font-family: 'Fira Code', monospace;
+            color: #2ed573;
+            background-color: rgba(46, 213, 115, 0.1);
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(46, 213, 115, 0.3);
+        }
+
+        .main-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 700px;
+        }
+
+        /* Cards Container */
+        .cards-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem 4rem 4rem 4rem;
+            z-index: 10;
+        }
+
+        .tech-card {
+            background-color: #1a1c22;
+            width: 260px;
+            height: 320px;
+            border-radius: 12px;
+            position: relative;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--accent-color);
+        }
+
+        /* Glow effect on hover/active */
+        .tech-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--glow-color);
+        }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+
+        .card-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .card-subtitle {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        /* Tech specific variables */
+        .card-django {
+            --accent-color: #0fb9b1;
+            /* Teal/Green */
+            --glow-color: rgba(15, 185, 177, 0.2);
+        }
+
+        .card-cms {
+            --accent-color: #4b7bec;
+            /* Royal Blue */
+            --glow-color: rgba(75, 123, 236, 0.2);
+        }
+
+        .card-api {
+            --accent-color: #a55eea;
+            /* Purple */
+            --glow-color: rgba(165, 94, 234, 0.2);
+        }
+
+        .card-arch {
+            --accent-color: #eb3b5a;
+            /* Red/Orange */
+            --glow-color: rgba(235, 59, 90, 0.2);
+        }
+
+        /* Connecting lines */
+        .connector-line {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            height: 2px;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    #333 10%,
+                    #333 90%,
+                    transparent 100%);
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Background Tech Grid -->
+        <div class="tech-bg"></div>
+        <!-- Code Decoration -->
+        <div class="section-tag code-decor code-1">
+            class RestaurantApp(models.Model):
+            version = "1.5.0"
+            status = "Active"
+
+            def optimize_delivery(self):
+            return True
+        </div>
+        <div class="section-tag code-decor code-2">
+            GET /api/v1/orders/
+            HTTP/1.1 200 OK
+            Content-Type: application/json
+            { "speed": "fast", "secure": true }
+        </div>
+        <!-- Header -->
+        <div class="header-section">
+            <div class="section-tag">&lt;system_architecture /&gt;</div>
+            <h1 class="main-title">Stack Tecnológica</h1>
+            <p class="subtitle">Desenvolvido com tecnologias modernas para garantir performance, segurança e
+                escalabilidade.</p>
+        </div>
+        <!-- Connecting Line behind cards -->
+        <div class="connector-line"></div>
+        <!-- Cards -->
+        <div class="cards-container">
+            <!-- Card 1: Django -->
+            <div class="tech-card card-django">
+                <div class="icon-circle">
+                    <i class="fab fa-python"></i>
+                </div>
+                <h3 class="card-title">Django 5.2</h3>
+                <p class="card-subtitle">BACKEND ROBUSTO</p>
+                <p class="card-desc">Framework de alto nível que garante segurança, desenvolvimento rápido e design
+                    limpo e pragmático.</p>
+            </div>
+            <!-- Card 2: CMS -->
+            <div class="tech-card card-cms">
+                <div class="icon-circle">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h3 class="card-title">CMS Integrado</h3>
+                <p class="card-subtitle">GESTÃO DE CONTEÚDO</p>
+                <p class="card-desc">Sistema dinâmico que permite edição de textos e imagens em tempo real sem alterar
+                    código.</p>
+            </div>
+            <!-- Card 3: API -->
+            <div class="tech-card card-api">
+                <div class="icon-circle">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+                <h3 class="card-title">API RESTful</h3>
+                <p class="card-subtitle">CONECTIVIDADE</p>
+                <p class="card-desc">Arquitetura moderna baseada em APIs para comunicação eficiente entre interfaces e
+                    dados.</p>
+            </div>
+            <!-- Card 4: Architecture -->
+            <div class="tech-card card-arch">
+                <div class="icon-circle">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3 class="card-title">Escalável</h3>
+                <p class="card-subtitle">INFRAESTRUTURA</p>
+                <p class="card-desc">Projetado para crescer com seu negócio, suportando alto volume de tráfego e
+                    transações.</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

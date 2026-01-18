@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Restaurant Web App - Funcionalidades Restaurante</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&amp;family=Oswald:wght@500;700&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #121212;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Decorative Background */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+            opacity: 0.05;
+        }
+
+        .circle-1 {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -100px;
+            background-color: #3498db;
+            /* Blue/Cyan for Admin feel */
+        }
+
+        .circle-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -100px;
+            left: -100px;
+            background-color: #9b59b6;
+            /* Purple */
+        }
+
+        /* Header Section */
+        .header-section {
+            padding: 3rem 4rem 1rem 4rem;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+        }
+
+        .main-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: 700;
+            border-left: 10px solid #3498db;
+            padding-left: 25px;
+            line-height: 1;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #888;
+            font-weight: 500;
+            max-width: 500px;
+            text-align: right;
+        }
+
+        /* Grid Layout */
+        .grid-wrapper {
+            flex: 1;
+            padding: 3rem 8rem 4rem 8rem;
+            /* Increased padding for better centering of 2x2 */
+            z-index: 10;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            /* Increased gap */
+            align-content: center;
+        }
+
+        .feature-card {
+            background-color: #1e1e1e;
+            border-radius: 15px;
+            padding: 2rem;
+            width: calc(50% - 1.5rem);
+            /* 2 cards per row perfectly */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-top: 4px solid transparent;
+            min-height: 230px;
+        }
+
+        .icon-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #2a2a2a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            margin-top: -4rem;
+            /* Pop out effect */
+            border: 5px solid #121212;
+        }
+
+        .card-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            color: #fff;
+        }
+
+        .card-desc {
+            font-size: 1rem;
+            color: #b0b0b0;
+            line-height: 1.5;
+        }
+
+        /* Card Specific Colors */
+        .card-admin {
+            border-top-color: #9b59b6;
+        }
+
+        .card-admin .icon-container {
+            color: #9b59b6;
+            box-shadow: 0 0 15px rgba(155, 89, 182, 0.2);
+        }
+
+        .card-dashboard {
+            border-top-color: #3498db;
+        }
+
+        .card-dashboard .icon-container {
+            color: #3498db;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.2);
+        }
+
+        .card-orders {
+            border-top-color: #f1c40f;
+        }
+
+        .card-orders .icon-container {
+            color: #f1c40f;
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.2);
+        }
+
+        .card-logistics {
+            border-top-color: #e74c3c;
+            overflow: visible;
+        }
+
+        .card-logistics .icon-container {
+            color: #e74c3c;
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.2);
+        }
+
+        /* Number Badge */
+        .number-badge {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            opacity: 0.1;
+        }
+
+        /* NOVO Badge */
+        .new-badge {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background-color: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.5);
+            transform: rotate(10deg);
+            z-index: 20;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(10deg);
+            }
+
+            50% {
+                transform: translateY(-5px) rotate(10deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Background Elements -->
+        <div class="bg-circle circle-1"></div>
+        <div class="bg-circle circle-2"></div>
+        <!-- Header -->
+        <div class="header-section">
+            <h1 class="main-title">Para o Restaurante</h1>
+            <div class="subtitle">
+                <p>Ferramentas poderosas para gestão eficiente e controle total do negócio.</p>
+            </div>
+        </div>
+        <!-- Grid Content -->
+        <div class="grid-wrapper">
+            <!-- Card 1: Admin Panel -->
+            <div class="feature-card card-admin">
+                <div class="icon-container">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <span class="number-badge">01</span>
+                <div class="card-title">Painel Administrativo</div>
+                <div class="card-desc">
+                    <p>Gestão completa de cardápio, categorias e usuários através de uma interface intuitiva e segura.
+                    </p>
+                </div>
+            </div>
+            <!-- Card 2: Dashboard -->
+            <div class="feature-card card-dashboard">
+                <div class="icon-container">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <span class="number-badge">02</span>
+                <div class="card-title">Dashboard de Controle</div>
+                <div class="card-desc">
+                    <p>Visão geral em tempo real com métricas vitais, gráficos de desempenho e atalhos rápidos.</p>
+                </div>
+            </div>
+            <!-- Card 3: Orders -->
+            <div class="feature-card card-orders">
+                <div class="icon-container">
+                    <i class="fas fa-receipt"></i>
+                </div>
+                <span class="number-badge">03</span>
+                <div class="card-title">Gestão de Pedidos</div>
+                <div class="card-desc">
+                    <p>Receba, processe e atualize o status dos pedidos dos clientes com total agilidade.</p>
+                </div>
+            </div>
+            <!-- Card 4: Logistics -->
+            <div class="feature-card card-logistics">
+                <div class="new-badge">Novidade!</div>
+                <div class="icon-container">
+                    <i class="fas fa-motorcycle"></i>
+                </div>
+                <span class="number-badge">04</span>
+                <div class="card-title">Logística Completa</div>
+                <div class="card-desc">
+                    <p>Sistema integrado para cadastro de entregadores, atribuição de rotas e rastreamento.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

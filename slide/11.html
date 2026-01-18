@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Restaurant Web App - Números e Impacto</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800&amp;family=Oswald:wght@500;700&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .slide-container {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background-color: #121212;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Background Elements - No Gradients */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIiBmaWxsPSJub25lIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTAgMjVoNTBNMjUgMHY1MCIvPjwvc3ZnPg==');
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #1a1a1a;
+            z-index: 0;
+        }
+
+        .circle-1 {
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            right: -100px;
+            border: 1px solid #333;
+            opacity: 0.5;
+        }
+
+        .circle-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -100px;
+            left: -100px;
+            border: 1px solid #333;
+            opacity: 0.3;
+        }
+
+        /* Header Section */
+        .header-section {
+            padding: 3rem 4rem 1rem 4rem;
+            z-index: 10;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .main-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            text-shadow: 4px 4px 0px #000;
+        }
+
+        .main-title span {
+            color: #ff4d4d;
+            background-color: rgba(255, 77, 77, 0.1);
+            padding: 0 10px;
+            border-radius: 8px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Cards Container */
+        .cards-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 4rem 3rem 4rem;
+            gap: 2rem;
+            z-index: 10;
+        }
+
+        .kpi-card {
+            flex: 1;
+            height: 380px;
+            background-color: #1e1e1e;
+            border-radius: 16px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #333;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+            border-color: #555;
+        }
+
+        .card-top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+        }
+
+        .card-icon-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10rem;
+            opacity: 0.05;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .kpi-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .kpi-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .kpi-desc {
+            font-size: 0.85rem;
+            color: #888;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        .icon-badge {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #252525;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border: 2px solid;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Color Variations */
+        /* Version */
+        .card-version .card-top-bar {
+            background-color: #3498db;
+        }
+
+        .card-version .kpi-number {
+            color: #3498db;
+        }
+
+        .card-version .icon-badge {
+            color: #3498db;
+            border-color: #3498db;
+        }
+
+        .card-version:hover {
+            box-shadow: 0 25px 50px rgba(52, 152, 219, 0.2);
+        }
+
+        /* Users */
+        .card-users .card-top-bar {
+            background-color: #e67e22;
+        }
+
+        .card-users .kpi-number {
+            color: #e67e22;
+        }
+
+        .card-users .icon-badge {
+            color: #e67e22;
+            border-color: #e67e22;
+        }
+
+        .card-users:hover {
+            box-shadow: 0 25px 50px rgba(230, 126, 34, 0.2);
+        }
+
+        /* Features */
+        .card-features .card-top-bar {
+            background-color: #9b59b6;
+        }
+
+        .card-features .kpi-number {
+            color: #9b59b6;
+        }
+
+        .card-features .icon-badge {
+            color: #9b59b6;
+            border-color: #9b59b6;
+        }
+
+        .card-features:hover {
+            box-shadow: 0 25px 50px rgba(155, 89, 182, 0.2);
+        }
+
+        /* Logistics */
+        .card-logistics .card-top-bar {
+            background-color: #2ecc71;
+        }
+
+        .card-logistics .kpi-number {
+            color: #2ecc71;
+            font-size: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .card-logistics .icon-badge {
+            color: #2ecc71;
+            border-color: #2ecc71;
+        }
+
+        .card-logistics:hover {
+            box-shadow: 0 25px 50px rgba(46, 204, 113, 0.2);
+        }
+
+        /* Decorative Dots */
+        .dot-pattern {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background-color: #333;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container">
+        <!-- Backgrounds -->
+        <div class="bg-grid"></div>
+        <div class="bg-circle circle-1"></div>
+        <div class="bg-circle circle-2"></div>
+        <!-- Header -->
+        <div class="header-section">
+            <h1 class="main-title">Números e <span>Impacto</span></h1>
+            <p class="subtitle">Métricas que comprovam a robustez e a completude do sistema.</p>
+        </div>
+        <!-- KPI Cards -->
+        <div class="cards-wrapper">
+            <!-- Card 1: Version -->
+            <div class="kpi-card card-version">
+                <div class="card-top-bar"></div>
+                <div class="card-icon-bg"><i class="fas fa-code-branch"></i></div>
+                <div class="card-content">
+                    <div class="icon-badge">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <div class="kpi-number">1.5.0</div>
+                    <div class="kpi-label">Versão Atual</div>
+                    <p class="kpi-desc">Estável, testada e pronta para produção.</p>
+                </div>
+                <div class="dot-pattern">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <!-- Card 2: Access Levels -->
+            <div class="kpi-card card-users">
+                <div class="card-top-bar"></div>
+                <div class="card-icon-bg"><i class="fas fa-users"></i></div>
+                <div class="card-content">
+                    <div class="icon-badge">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="kpi-number">3</div>
+                    <div class="kpi-label">Níveis de Acesso</div>
+                    <p class="kpi-desc">Público, Cliente e Administrador segregados.</p>
+                </div>
+                <div class="dot-pattern">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <!-- Card 3: Features -->
+            <div class="kpi-card card-features">
+                <div class="card-top-bar"></div>
+                <div class="card-icon-bg"><i class="fas fa-star"></i></div>
+                <div class="card-content">
+                    <div class="icon-badge">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="kpi-number">8+</div>
+                    <div class="kpi-label">Funcionalidades</div>
+                    <p class="kpi-desc">Do cardápio ao feedback, tudo integrado.</p>
+                </div>
+                <div class="dot-pattern">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <!-- Card 4: Logistics -->
+            <div class="kpi-card card-logistics">
+                <div class="card-top-bar"></div>
+                <div class="card-icon-bg"><i class="fas fa-truck"></i></div>
+                <div class="card-content">
+                    <div class="icon-badge">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <div class="kpi-number"><i class="fas fa-check"></i></div>
+                    <div class="kpi-label">Logística Full</div>
+                    <p class="kpi-desc">Sistema completo de rastreio e gestão.</p>
+                </div>
+                <div class="dot-pattern">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

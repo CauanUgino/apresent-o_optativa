@@ -28,11 +28,24 @@ function scalePresentation() {
   const baseWidth = 1920;
   const baseHeight = 1080;
 
-  const scaleX = window.innerWidth / baseWidth;
-  const scaleY = window.innerHeight / baseHeight;
-  const scale = Math.min(scaleX, scaleY);
+  const availableWidth = window.innerWidth;
+  const availableHeight = window.innerHeight;
 
+  const scale = Math.min(
+    availableWidth / baseWidth,
+    availableHeight / baseHeight
+  );
+
+  // Aplica a escala
   iframe.style.transform = `scale(${scale})`;
+
+  // Centraliza manualmente o iframe escalonado dentro do wrapper
+  const left = (availableWidth - baseWidth * scale) / 2;
+  const top = (availableHeight - baseHeight * scale) / 2;
+
+  iframe.style.position = 'absolute';
+  iframe.style.left = `${left}px`;
+  iframe.style.top = `${top}px`;
 }
 
 window.addEventListener('resize', scalePresentation);

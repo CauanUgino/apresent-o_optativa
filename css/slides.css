@@ -25,7 +25,8 @@ body {
   height: 1080px;
   border: none;
   background: #fff;
-  transform-origin: center center;
+  display: block;
+  transform-origin: top left; /* Alinhamento corrigido para o cálculo de escala */
 }
 
 /* Controles */
